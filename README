@@ -1,0 +1,6 @@
+Export Firefox bookmarks, downloads, history, passwords and tabs to CSV files.
+
+Usage:
+    ./export-firefox-profiles [PROFILE_PATH]
+
+Requires: python3 and lz4, pyasn1, pydes libraries
