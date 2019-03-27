@@ -11,7 +11,7 @@ def load_history(input_dir):
 
 def save_history(input_dir = '.', output_dir = '.', history = None):
     if history is None: history = load_history(input_dir)
-    f = open(os.path.join(output_dir, 'history.csv'), 'w')
+    f = open(os.path.join(output_dir, 'history.csv'), 'w', encoding = 'utf-8')
     f.write(History.title + '\n')
     for hist in sort_history(history):
         f.write(str(hist) + '\n')

@@ -9,7 +9,7 @@ def load_downloads(input_dir):
 
 def save_downloads(input_dir = '.', output_dir = '.', downloads = None):
     if downloads is None: downloads = load_downloads(input_dir)
-    f = open(os.path.join(output_dir, 'downloads.csv'), 'w')
+    f = open(os.path.join(output_dir, 'downloads.csv'), 'w', encoding = 'utf-8')
     f.write(Download.title + '\n')
     for dl in sort_downloads(downloads):
         f.write(str(dl) + '\n')

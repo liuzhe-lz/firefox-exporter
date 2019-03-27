@@ -18,7 +18,7 @@ def load_passwords(input_dir):
 
 def save_passwords(input_dir = '.', output_dir = '.', passwords = None):
     if passwords is None: passwords = load_passwords(input_dir)
-    f = open(os.path.join(output_dir, 'passwords.csv'), 'w')
+    f = open(os.path.join(output_dir, 'passwords.csv'), 'w', encoding = 'utf-8')
     f.write(Password.title + '\n')
     for password in sort_passwords(passwords):
         f.write(str(password) + '\n')

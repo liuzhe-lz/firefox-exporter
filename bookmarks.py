@@ -15,7 +15,7 @@ def load_bookmarks(input_dir):
 
 def save_bookmarks(input_dir = '.', output_dir = '.', bookmarks = None):
     if bookmarks is None: bookmarks = load_bookmarks(input_dir)
-    f = open(os.path.join(output_dir, 'bookmarks.csv'), 'w')
+    f = open(os.path.join(output_dir, 'bookmarks.csv'), 'w', encoding = 'utf-8')
     f.write(Bookmark.title + '\n')
     for bookmark in sort_bookmarks(bookmarks):
         f.write(str(bookmark) + '\n')

@@ -27,13 +27,13 @@ def _try_mkdir(path):
 
 def find_profiles():
     if sys.platform == 'linux':
-        return _find_profiles_linux()
-    assert False
-
-def _find_profiles_linux():
-    path = os.path.expanduser('~/.mozilla/firefox')
+        path = os.path.expanduser('~/.mozilla/firefox')
+    elif sys.platform == 'win32':
+        path = os.path.expanduser('~\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles')
+    else:
+        assert False
     profiles = [ profile for profile in os.listdir(path) if profile.endswith('.default') ]
-    return { profile[:-8] : path + '/' + profile for profile in profiles }
+    return { profile[:-8] : os.path.join(path, profile) for profile in profiles }
 
 
 def export_default_profiles():

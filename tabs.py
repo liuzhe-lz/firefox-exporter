@@ -18,7 +18,7 @@ def load_tabs(input_dir):
 
 def save_tabs(input_dir = '.', output_dir = '.', tabs = None):
     if tabs is None: tabs = load_tabs(input_dir)
-    f = open(os.path.join(output_dir, 'tabs.csv'), 'w')
+    f = open(os.path.join(output_dir, 'tabs.csv'), 'w', encoding = 'utf-8')
     f.write(Tab.title + '\n')
     for tab in sort_tabs(tabs):
         f.write(str(tab) + '\n')
