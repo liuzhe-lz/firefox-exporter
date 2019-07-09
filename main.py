@@ -2,6 +2,7 @@
 
 from profile import Profile
 
+from datetime import date
 import os
 import sys
 import traceback
@@ -9,12 +10,14 @@ import traceback
 
 def _export_profile(key, input_dir):
     assert os.path.isdir(input_dir)
+    modified_time = os.path.getmtime(input_dir)
+    modified_date = date.fromtimestamp(modified_time).strftime('%Y%m%d')
     os.makedirs('firefox-profiles', exist_ok = True)
-    output_dir = os.path.join('firefox-profiles', key)
+    output_dir = os.path.join('firefox-profiles', '{}-{}'.format(key, modified_date))
     i = 0
     while not _try_mkdir(output_dir):
         i += 1
-        output_dir = os.path.join('firefox-profiles', '{}.{}'.format(key, i))
+        output_dir = os.path.join('firefox-profiles', '{}-{}.{}'.format(key, modified_date, i))
     Profile(input_dir).save(output_dir)
 
 def _try_mkdir(path):
@@ -31,7 +34,7 @@ def find_profiles():
     elif sys.platform == 'win32':
         path = os.path.expanduser('~\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles')
     else:
-        assert False
+        raise RuntimeError('unsupported system')
     profiles = [ profile for profile in os.listdir(path) if profile.endswith('.default') ]
     return { profile[:-8] : os.path.join(path, profile) for profile in profiles }
 
